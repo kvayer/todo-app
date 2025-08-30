@@ -8,6 +8,7 @@ import (
 
 	"github.com/joho/godotenv"
 	todoapp "github.com/kvayer/todo-app"
+	_ "github.com/kvayer/todo-app/docs" // ваш путь к docs
 	"github.com/kvayer/todo-app/pkg/handler"
 	"github.com/kvayer/todo-app/pkg/repository"
 	"github.com/kvayer/todo-app/pkg/service"
@@ -15,6 +16,17 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
+
+// @title TodoApp API
+// @version 1.0
+// @description API Server for TodoList Application
+
+// @host localhost:8000
+// @BasePath /
+
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
 
 func main() {
 	logrus.SetFormatter(new(logrus.JSONFormatter))
@@ -58,7 +70,7 @@ func main() {
 
 	logrus.Print("TodoApp Shutting Down")
 
-	if err:= srv.Shutdown(context.Background()); err != nil {
+	if err := srv.Shutdown(context.Background()); err != nil {
 		logrus.Errorf("error occured on server shutting down: %s", err.Error())
 	}
 	if err = db.Close(); err != nil {
